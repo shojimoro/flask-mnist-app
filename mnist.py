@@ -18,7 +18,7 @@ app = Flask(__name__)
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-model = load_model('./model.h5')#学習済みモデルをロード
+model = load_model('./model.h5',compile=False)#学習済みモデルをロード
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -48,7 +48,6 @@ def upload_file():
             return render_template("index.html",answer=pred_answer)
 
     return render_template("index.html",answer="")
-
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 8080))
